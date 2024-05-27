@@ -33,7 +33,8 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/admin", true));
+                        .defaultSuccessUrl("/admin", true))
+                .logout(logout -> logout.logoutUrl("/admin-logout").logoutSuccessUrl("/login"));
         return http.build();
     }
 
