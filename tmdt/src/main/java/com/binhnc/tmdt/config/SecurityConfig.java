@@ -40,6 +40,6 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/static/**", "/fe/**", "/assets/**");
+        return (web) -> web.ignoring().antMatchers("/static/**", "/fe/**", "/assets/**", "/uploads/**");
     }
 }

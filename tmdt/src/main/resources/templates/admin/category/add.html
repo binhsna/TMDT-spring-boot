@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/fragments/head::head"></head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -29,7 +29,6 @@
 
         <!-- Main content -->
         <section class="content">
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="box box-primary">
@@ -43,7 +42,6 @@
                                     <input type="text" class="form-control" id="categoryName"
                                            th:field="*{categoryName}">
                                 </div>
-
                                 <div class="form-group">
                                     <label>Category Status</label>
                                     <div>
@@ -52,25 +50,21 @@
                                                    id="status1" name="categoryStatus" th:field="*{categoryStatus}"/>
                                             <label class="form-check-label" for="status1">Active</label>
                                         </div>
-
                                         <div class="form-check form-check-inline">
                                             <input type="radio" class="form-check-input" value="0"
                                                    id="status2" name="categoryStatus" th:field="*{categoryStatus}"/>
                                             <label class="form-check-label" for="status2">Hidden</label>
                                         </div>
-
                                     </div>
+                                </div>
                             </div>
-
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
             </div>
-
         </section>
         <!-- /.content -->
     </div>
