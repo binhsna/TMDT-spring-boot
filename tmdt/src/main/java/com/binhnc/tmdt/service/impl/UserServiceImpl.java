@@ -1,7 +1,8 @@
-package com.binhnc.tmdt.service;
+package com.binhnc.tmdt.service.impl;
 
 import com.binhnc.tmdt.model.User;
 import com.binhnc.tmdt.repository.UserRepository;
+import com.binhnc.tmdt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

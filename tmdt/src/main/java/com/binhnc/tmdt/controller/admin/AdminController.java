@@ -16,10 +16,12 @@ public class AdminController {
     }
 
     @RequestMapping("/")
-    public String admin(Model model) {
+    /*public String admin(Model model) {
         CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
         return "admin/index";
+    }*/
+    public String admin() {
+        return "admin/index";
     }
-
 }

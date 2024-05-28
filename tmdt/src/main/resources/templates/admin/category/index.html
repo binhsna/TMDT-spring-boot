@@ -36,57 +36,32 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Danh sách danh mục</h3>
                             <div>
-                                <a class="btn btn-success" href="category/add-category">Thêm mới danh mục</a>
+                                <a class="btn btn-success" th:href="@{/admin/add-category}">Thêm mới danh mục</a>
                             </div>
                         </div>
                         <div class="box-body">
                             <table class="table table-bordered">
                                 <tbody>
                                 <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Task</th>
-                                    <th>Progress</th>
-                                    <th style="width: 40px">Label</th>
+                                    <th style="width: 10px">ID</th>
+                                    <th style="width: 35%">Category Name</th>
+                                    <th style="width: 40px">status</th>
+                                    <th>Action</th>
                                 </tr>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Update software</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                        </div>
+
+                                <tr th:each="category : ${list}">
+                                    <td th:inline="text">[[${category.id}]]</td>
+                                    <td th:text="${category.CategoryName}"></td>
+                                    <td th:if="${category.CategoryStatus}"><span class="label label-success">Hiện</span>
+                                    <td th:if="${!category.CategoryStatus}"><span class="label label-danger">Ẩn</span>
                                     </td>
-                                    <td><span class="badge bg-red">55%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Clean database</td>
                                     <td>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                        </div>
+                                        <a th:href="@{/admin/edit-category/{id}(id=${category.id})}"
+                                           class="btn btn-primary">Edit</a>
+                                        <a th:href="@{'/admin/delete-category/'+${category.id}}"
+                                           class="btn btn-danger"
+                                           onclick="return confirm('Bạn có chắc chắn không?')">Delete</a>
                                     </td>
-                                    <td><span class="badge bg-yellow">70%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Cron job running</td>
-                                    <td>
-                                        <div class="progress progress-xs progress-striped active">
-                                            <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-light-blue">30%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Fix and squish bugs</td>
-                                    <td>
-                                        <div class="progress progress-xs progress-striped active">
-                                            <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-green">90%</span></td>
                                 </tr>
                                 </tbody>
                             </table>
