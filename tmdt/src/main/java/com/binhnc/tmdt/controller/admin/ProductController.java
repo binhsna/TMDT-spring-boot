@@ -58,12 +58,17 @@ public class ProductController {
     @GetMapping("/edit-product/{id}")
     public String edit(Model model, @PathVariable("id") Integer id) {
         Product product = this.productService.findById(id);
+        List<Category> listCategory = this.categoryService.getAll();
         model.addAttribute("product", product);
+        model.addAttribute("listCategory", listCategory);
         return "admin/product/edit";
     }
 
     @PostMapping("/edit-product")
-    public String edit(@ModelAttribute("product") Product product) {
+    public String edit(@ModelAttribute("product") Product product, @RequestParam("fileImage") MultipartFile file) {
+        this.storageService.store(file);
+        String fileName = file.getOriginalFilename();
+        product.setImage(fileName);
         if (this.productService.update(product)) {
             ;
         }

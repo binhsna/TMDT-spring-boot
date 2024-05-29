@@ -35,28 +35,46 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Quick Example</h3>
                         </div>
-                        <form role="form" method="post" th:action="@{/admin/edit-category}" th:object="${category}">
+                        <form role="form" method="post" th:action="@{/admin/edit-product}" th:object="${product}"
+                              enctype="multipart/form-data">
                             <input type="hidden" th:field="*{id}"/>
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="categoryName">Category Name</label>
-                                    <input type="text" class="form-control" id="categoryName"
-                                           th:field="*{categoryName}">
+                                    <label for="productName">Product Name</label>
+                                    <input type="text" class="form-control" id="productName"
+                                           th:field="*{productName}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Category Status</label>
-                                    <div>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" checked="checked" value="1"
-                                                   id="status1" name="categoryStatus" th:field="*{categoryStatus}"/>
-                                            <label class="form-check-label" for="status1">Active</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" value="0"
-                                                   id="status2" name="categoryStatus" th:field="*{categoryStatus}"/>
-                                            <label class="form-check-label" for="status2">Hidden</label>
-                                        </div>
+                                    <label for="price">Price</label>
+                                    <input type="text" class="form-control" id="price"
+                                           th:field="*{price}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fileImage">Image</label>
+                                    <input type="file" class="form-control" id="fileImage" name="fileImage">
+                                    <div id="image_show">
+                                        <a th:href="@{'/uploads/'+${product.image}}" target="_blank">
+                                            <img th:src="@{'/uploads/'+${product.image}}"
+                                                 th:style="'max-width:100%; height:auto;'"
+                                                 width="100" height="100"/>
+                                        </a>
                                     </div>
+                                    <input type="hidden" name="image" id="image" value="${product.image}}"
+                                           th:field="*{image}">
+                                </div>
+                                <div class="form-group" data-select2-id="13">
+                                    <label>Category</label>
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;"
+                                            th:field="*{category.id}">
+                                        <option th:each="category : ${listCategory}" th:value="${category.id}"
+                                                th:text="${category.categoryName}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" id="description" rows="10" cols="80"
+                                              th:field="*{description}">
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="box-footer">
@@ -75,7 +93,11 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-
 <div th:replace="admin/fragments/script::script"></div>
+<script th:src="@{/assets/js/my-admin.js}"></script>
+<script th:src="@{/assets/ckeditor/ckeditor.js}"></script>
+<script>
+    CKEDITOR.replace( 'description' );
+</script>
 </body>
 </html>
