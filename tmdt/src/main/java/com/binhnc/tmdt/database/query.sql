@@ -6,7 +6,7 @@ select * from categories;
 (N'Quần',0)*/
 -- drop table products;
 go
-select * from categories;
+select * from categories c where c.category_name like '%Q%';
 go
 select * from products;
 go
