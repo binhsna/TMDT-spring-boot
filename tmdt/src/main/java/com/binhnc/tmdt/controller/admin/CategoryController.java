@@ -3,6 +3,7 @@ package com.binhnc.tmdt.controller.admin;
 import com.binhnc.tmdt.model.Category;
 import com.binhnc.tmdt.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +18,15 @@ public class CategoryController {
     CategoryService categoryService;
 
     @GetMapping("/category")
-    public String index(Model model, @Param("keyword") String keyword) {
-        List<Category> list = this.categoryService.getAll();
+    public String index(Model model, @Param("keyword") String keyword, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
+        //  List<Category> list = this.categoryService.getAll();
+        Page<Category> list = this.categoryService.getAll(pageNo);
         if (keyword != null) {
-            list = this.categoryService.searchCategory(keyword);
+            list = this.categoryService.searchCategory(keyword, pageNo);
             model.addAttribute("keyword", keyword);
         }
+        model.addAttribute("totalPage", list.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         model.addAttribute("list", list);
         return "admin/category/index";
     }
